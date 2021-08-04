@@ -6,7 +6,7 @@
 
 Son dispositivos que realizan interpretación del lenguaje humano coloquial para entender qué es lo que se les está comunicando y, de este modo, poder responder a las necesidades de las personas, ya sea verbalmente o mediante la ejecución de una acción concreta.
 
-Insertar imagen
+![google_home](home.png?raw=true "Title")
 
 ### Autos autónomos: Tesla.
 
@@ -17,6 +17,8 @@ Un vehículo autónomo debe poder:
 2. Predecir al resto de conductores, por lo que es necesario que el auto entienda las formas de manejar de los conductores en diferentes regiones, aprender de ello y evitar accidentes automovilísticos
 
 3. Conducir en general (frenar, acelerar, girar, etc.), por lo que es necesario que el auto entienda o interprete el contexto en el que se encuentra, para poder actuar a conciencia de la circunstancias.
+
+![driving](drive.png?raw=true "Title")
 
 ### Otras aplicaciones.
 
