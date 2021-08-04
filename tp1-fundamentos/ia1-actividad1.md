@@ -70,9 +70,11 @@ Sin duda la complejidad de desarrollar el concepto como IA se debe en gran parte
 
 Existen dos grandes grupos de teorías: aquellas que definen a la inteligencia como una única capacidad general, medible a través de pruebas estandarizadas dando lugar a valores como el cociente intelectual, y aquellas que definen a la inteligencia como un conjunto de habilidades y aptitudes.
 
-De esta última, cabe resaltar una que actualmente es muy relevante: la teoría de las inteligencias múltiples de Gardner.
+De esta última, cabe resaltar dos que actualmente son muy relevantes: teoría de inteligencia de Cattell y teoría de las inteligencias múltiples de Gardner.
 
-Esta teoría sugiere que existen ocho tipos de inteligencias que se ven claramente reflejadas al comparar distintos sujetos, puesto que cada uno puede ser más habilidoso en ciertas áreas que en otras. Una conclusión relevante de dicha teoría es que un sujeto que tiene un altísimo nivel académico pero torpe físicamente no es más inteligente que un deportista profesional que le ha costado las matemáticas toda su vida.
+En la primera, este autor interpreta que la capacidad intelectual está configurada por dos tipos de inteligencia: fluida y cristalizada. Mientras que la inteligencia fluida se corresponde con el razonamiento y la capacidad general de adaptación en situaciones novedosas, sin que el aprendizaje influya en la actuación llevada a cabo, la inteligencia cristalizada se refiere a la capacidad de aplicar los conocimientos aprendidos a lo largo de la vida.
+
+En cambio, en la teoria propuesta por Gardner, esta sugiere que existen ocho tipos de inteligencias que se ven claramente reflejadas al comparar distintos sujetos, puesto que cada uno puede ser más habilidoso en ciertas áreas que en otras. Una conclusión relevante de dicha teoría es que un sujeto que tiene un altísimo nivel académico pero torpe físicamente no es más inteligente que un deportista profesional que le ha costado las matemáticas toda su vida.
 
 Las inteligencias que Gardner sugiere son: linguística, lógico-matemática, espacial, musical, corporal y cinestésica, intrapersonal, interpersonal y naturalista.
 
