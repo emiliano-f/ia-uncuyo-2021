@@ -103,14 +103,16 @@ Agrega que algunas máquinas sí tienen mente: los humanos son máquinas biológ
 
 Todo avance científico y tecnológico acarreo a sus espaldas consecuencias no deseables para muchas personas. Centrarse ya no en poder desarrollar IA, sino en si deberíamos también es un debate importante puesto que nos corresponde como profesionales reorientar éticamente los desarrollos e investigaciones. Desafortunadamente, a diferencia de cualquier avance visto anteriormente, la IA puede acarrear problemas más preocupantes:
 
-1. Las personas pueden perder su trabajo;
+1. Las personas pueden perder su trabajo: muchos sistemas informáticos dependen en gran medida de algoritmos de IA, por lo que miles de trabajadores ya están siendo desplazados de sus puestos y se espera que en un futuro esto incremente mucho más. Sin embargo, también está creando puestos de trabajo que requieren una preparación más sofisticada, aumentado a su vez el nivel de ingresos de un trabajador.
 
-2. Pueden tener demasiado (o muy poco) tiempo libre;
+2. Pueden tener demasiado (o muy poco) tiempo libre: Alvin Toffler aseguró que la semana laboral fue reducia en un 50 por ciento desde el inicio del siglo XX, prediciendo que sucedería lo mismo a mediados de los 2000. Por otro lado, trabajadores cualificados que mantienen sistemas computarizados que funcionan la 24 horas del día están forzados a cumplir largas horas de trabajo.
 
-3. Los sistemas IA pueden utilizarse para fines no deseados;
+3. La gente podría perder su sentido de ser única: Weizembaum argumenta que la investigación de IA puede hacer realidad la idea de que los humanos son autómatas, desencadenando la idea de la no autonomía de la humanidad. Esto no suena descabellado, ya que lo discutido en la sección de IA fuerte puede avalar las afirmaciones de Weizembaum.
 
-4. El uso de los sistemas de IA podría dar lugar a una pérdida de responsabilidad.
+4. Los sistemas IA pueden utilizarse para fines no deseados: Los sistemas autónomos de IA son un común en conflictos militares, desde sistemas de vuelo y vehículos en tierra. A esto le sumamos que el proceso de toma de decisiones de una IA puede fallar, ocasionando el asesinato de civiles inocentes. Del mismo modo, tecnologías de reconocimiento ocasiona la pérdida de libertades y privacidad de la población.
 
-5. El éxito de la IA podría significar el fin de la raza humana.
+5. El uso de los sistemas de IA podría dar lugar a una pérdida de responsabilidad: puede darse principalmente a la hora del diagnóstico médico. Si un sistema experto brinda su opinión en base a sus estudios, ¿quién será responsable si este diagnóstico es erróneo?
+
+6. El éxito de la IA podría significar el fin de la raza humana: sistemas de IA poseen mayores riesgos que el software tradicional. Por ejemplo, los misiles de defensa pueden interpretar erróneamente un ataque y lanzar un contraataque, cargando con las consecuencias de ello. Puede darse la situación de tener una máquina ultrainteligente (una máquina que puede sobrepasar todas las actividades intelectuales de un hombre) perdiendo los humanos la capacidad de comprenderlas y, según ciertos teóricos, abrir las puertas al transhumanismo.
 
 # Conclusión
