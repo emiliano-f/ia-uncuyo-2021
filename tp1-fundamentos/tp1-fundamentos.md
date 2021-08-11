@@ -67,16 +67,50 @@ No obstante, Turing sostiene que la pregunta está mal definida puesto que cada 
 En contra de esto, aún se puede insistir en que los humanos tienen mentes reales y las máquinas podrían o no tenerlas. Este problema debe ser abordado teniendo en cuenta que los humanos tambien tienen cuerpo y cómo éste se relaciona con la mente, ya que desde este punto podríamos dar luz a la cuestión de sí las máquinas pueden tener mentes reales. Hay que tener presente, desde luego, la teoría dualista de René Descartes que sostiene que cuerpo y mente están separados y la teoría del fisicalismo que asegura que los estados mentales son estados físicos - abriendo la puerta a la posibilidad de una IA fuerte.
 
 
-### Estados mentales y el cerebro in a vat
+### Estados mentales y el cerebro en un frasco
 
-### Funcionalismo y el experimento de reemplazo de cerebro
+Intentando explicar qué significa que una persona se halle en un cierto estado mental concreto, los filósofos fisicalistas se han centrado particularmente en los estados intencionales: aquellos consisten en creer, saber, desear, tener, etc., que se refieren a algún aspecto del mundo exterior. Por ejemplo,
+
+### Funcionalismo y el experimento de sustitución de cerebro
+
+La teoría del funcionalismo dice que un estado mental es cualquier condición causal intermedia entre la entrada y la salida. Según esta teoría, dos sistemas cualesquiera con procesos causales isomórficos tendrían los mismos estados mentales. Esto quiere decir que un ordenador podría tener los mismos estados mentales de una persona. Una forma de ver claramente esto es a través del experimento de sustitución del cerebro, donde -en resumidas palabras- afirma que un sujeto no perdería su conciencia y no sería perceptible por terceros a medida que sus neuronas son reemplazadas por otras artificiales.
+
+Sus detractores argumentan, sin embargo, que la pérdida total de la conciencia es inevitable, pero la pregunta es si esta es instantánea o no. Es poco probable que sea instantánea teniendo en cuenta que sería rápidamente observable por terceros. Pero si esta es gradual, el sujeto puede expresar acciones que pueden dar a conocer lo que le está sucediendo. Además, una vez concretada la pérdida total, ¿cómo la veríamos reflejada? ¿cómo serían sus instintos?
+
+Pueden ocurrir tres cosas:
+
+1. Los mecanismos causales de la conciencia pueden seguir operando en cerebros electrónicos, por lo tanto es conciente.
+
+2. Los eventos mentales conscientes en el cerebro normal no tienen conexión causal con el comportamiento y están ausentes en el cerebro artificial, por lo tanto no es conciente.
+
+3. El experimento es imposible, invalidando cualquier especulación sobre él.
+
+Patricia Churchland señala que los argumentos funcionalistas que operan a nivel neurona tambien pueden ser escalables, por lo que reemplazar todo el cerebro por un circuito que se actualiza y mapea desde entradas hasta las salidas a través de una enorme tabla de búsqueda, aún mantendría la conciencia.
 
 ### Naturalismo biológico y el cuarto chino
 
-### Conciencia, qualia y la brecha explicativa
+El naturalismo biológico de John Searle señala que los estados mentales son características mentales de alto nivel que son causadas por procesos físicos de bajo nivel en las neuronas, y lo que importa son las propiedades (no especificadas) de las neuronas. Así, los estados mentales únicamente podrían ser duplicados sobre un programa con la misma arquitectura con igual poder causal de las neuronas.
 
+Para apoyar su punto de vista, Searle describe un sistema hipotético que claramente está ejecutando un programa y pasa el test de Turing, pero que igualmente claramente (según Searle) no entiende nada de sus entradas y salidas. Su conclusión es que ejecutar el programa adecuado (tener los resultados correctos) no es condición suficiente para ser una mente.
 
+Agrega que algunas máquinas sí tienen mente: los humanos son máquinas biológicas con mente. Según Searle, los cerebros humanos pueden o no ejecutar algo parecido a un programa de IA, pero si lo hacen, esa no es la razón por la que son mentes. Se necesita algo más para hacer una mente, según Searle, algo equivalente a los poderes causales de las neuronas individuales. No se especifica cuáles son estos poderes. No obstante, las neuronas están desde mucho antes de que se desarrollara la conciencia; luego, ¿qué impide que otro órgano no pueda ser una mente?
+
+### Conciencia y la brecha explicativa
+
+¿Por qué se siente algo al tener ciertos estados cerebrales mientras que presumiblemente no se siente nada al tener otros estados físicos (por ejemplo, ser un objeto inanimado)? Considerando el experimento del espectro invertido junto a la experiencia subjetiva, filósofos concluyen que los seres humanos son sencillamente incapaces de formarse una comprensión adecuada de su propia conciencia.
 
 # Ética y riesgos de desarrollar inteligencia artificial
+
+Todo avance científico y tecnológico acarreo a sus espaldas consecuencias no deseables para muchas personas. Centrarse ya no en poder desarrollar IA, sino en si deberíamos también es un debate importante puesto que nos corresponde como profesionales reorientar éticamente los desarrollos e investigaciones. Desafortunadamente, a diferencia de cualquier avance visto anteriormente, la IA puede acarrear problemas más preocupantes:
+
+1. Las personas pueden perder su trabajo;
+
+2. Pueden tener demasiado (o muy poco) tiempo libre;
+
+3. Los sistemas IA pueden utilizarse para fines no deseados;
+
+4. El uso de los sistemas de IA podría dar lugar a una pérdida de responsabilidad.
+
+5. El éxito de la IA podría significar el fin de la raza humana.
 
 # Conclusión
