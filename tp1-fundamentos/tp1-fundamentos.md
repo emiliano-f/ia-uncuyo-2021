@@ -69,7 +69,7 @@ En contra de esto, aún se puede insistir en que los humanos tienen mentes reale
 
 ### Estados mentales y el cerebro en un frasco
 
-Intentando explicar qué significa que una persona se halle en un cierto estado mental concreto, los filósofos fisicalistas se han centrado particularmente en los estados intencionales: aquellos consisten en creer, saber, desear, tener, etc., que se refieren a algún aspecto del mundo exterior. Por ejemplo,
+Intentando explicar qué significa que una persona se halle en un cierto estado mental concreto, los filósofos fisicalistas se han centrado particularmente en los estados intencionales: aquellos consisten en creer, saber, desear, tener, etc., que se refieren a algún aspecto del mundo exterior. Por ejemplo, el conocimiento de estar corriendo es una creencia de mi entorno y de lo que ocurre. Es decir, el estado mental debe estar determinado por el estado cerebral.
 
 ### Funcionalismo y el experimento de sustitución de cerebro
 
