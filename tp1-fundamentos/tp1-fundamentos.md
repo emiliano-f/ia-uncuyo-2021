@@ -117,4 +117,8 @@ Todo avance científico y tecnológico acarreo a sus espaldas consecuencias no d
 
 # Conclusión
 
-Los avances en IA tienen su fundamento en varias áreas, no dejando de lado teorías algo descabelladas. En todo lo expuesto, las incertezas están a la orden del día: tenemos más preguntas que respuestas. Depende de cada perfil en qué charco nos sumergiremos pero, por lo pronto, no hay que perder de vista lo desarrollado en la anterior sección porque es donde podemos actuar en el cortísimo plazo. Esta amplia área nos puede hacer más humanos -en nuestra informalidad e inexactitud- y también nos puede ayudar a comprender más allá del código.
+En la conferencia de Dartmouth, en 1956, algunos afirmaban que la IA era imposible, que solo vagaba por el culto al computacionalismo. Más de 60 años después, vemos que se han equivocado: la IA -débil- está más presente que nunca, no hace falta enumerar a estas alturas todos aquellos ámbitos en los que está presente.
+
+Quizás hoy el más cauteloso preferiría afirmar nuevamente lo mismo: una IA fuerte es un culto al computacionalismo. Sin embargo, el avance científico es enorme en este campo y no hay una precisión sobre qué podemos descubrir o desarrollar en el futuro. Indudablemente, considero que antes ocurrirá lo propuesto por Turing: una máquina inteligente dejará de ser discriminada no por tener incorporada una conciencia, sino por simular una "inteligencia" extremadamente elevada que será desapercibida por terceros.
+
+Los avances en IA tienen su fundamento en varias áreas. En todo lo expuesto, las incertezas están a la orden del día: tenemos más preguntas que respuestas. Depende de cada perfil en qué charco nos sumergiremos pero, por lo pronto, no hay que perder de vista lo desarrollado en la anterior sección porque es donde podemos actuar en el cortísimo plazo. Esta amplia área nos puede hacer más humanos -en nuestra informalidad e inexactitud- y también nos puede ayudar a comprender más allá del código.
