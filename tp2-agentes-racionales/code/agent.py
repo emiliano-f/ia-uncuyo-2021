@@ -28,8 +28,34 @@ class Agent:
 
     def suck(self):
 
+        env: Environment = self.environment
+        self.environment.floor[env.posX][env.posY] = False
+
     def idle(self):
+
+        print("Zzz")
 
     def perspective(self, _environ):
 
+        env: Environment = self.environment
+        return self.environment.floor[env.posX][env.posY]
+
     def think(self):
+
+        def to_corner():
+
+            def nearest() -> Tuple:
+
+                env: Environment = self.environment
+                if env.sizeX - (env.posX +1) <= env.sizeX // 2:
+                    row = True # to right
+                else:
+                    row = False # to left
+
+                if env.sizeY - (env.posY +1) <= env.sizeY // 2:
+                    col = True # to up
+                else:
+                    col = False # to down
+
+                return (row,col)
+
