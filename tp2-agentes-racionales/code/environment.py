@@ -41,13 +41,19 @@ class Environment:
         self.dirt_rate = _dirt_rate
         self.sizeX = _sizeX
         self.sizeY = _sizeY
+        self.posX = _posX
+        self.posY = _posY
         self.dirt_tiles = round(_sizeX*_sizeY*dirt_rate)
 
-    def is_dirty(self) -> Tuple:
+    def is_dirty(self) -> tuple:
 
         if self.dirt_tiles == 0:
             return (False, self.dirt_rate, self.dirt_tiles)
         return (True, self.dirt_rate, self.dirt_tiles)
+
+    def get_position(self) -> tuple:
+
+        return (self.posX, self.posY)
 
     def get_performance(self):
 
