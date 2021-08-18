@@ -69,73 +69,8 @@ class Agent:
         return self.environment.floor[env.posX][env.posY]
 
     def act(self) -> None:
-        #actua tomando una perspectiva, y decide si limpiar o no
-        #como es una accion, aqui deberiamos disminuir del 1000
+
         if self.perspective:
             self.suck()
         else:
             self.idle()
-
-    def think(self):
-
-        def nearest() -> tuple:
-
-            env: Environment = self.environment
-            row: bool
-            col: bool
-            if env.sizeX - (env.posX +1) <= env.sizeX // 2:
-                row = True # to right
-            else:
-                row = False # to left
-
-            if env.sizeY - (env.posY +1) <= env.sizeY // 2:
-                col = True # to up
-            else:
-                col = False # to down
-
-            return (row,col)
-
-        def to_corner():
-
-            dest: tuple = nearest()
-
-            if dest[0]:
-                self.act()
-                self.to_right()
-            else:
-                self.act()
-                self.to_left()
-
-            if dest[1]:
-                self.to_up()
-            else:
-                self.to_down()
-
-        def sweep():
-
-            corner: tuple = self.environment.get_position()
-            env: Environment = self.environment
-            flag_to_right: bool
-            if corner[0] == 0:
-                flag_to_right = True
-            else:
-                flag_to_right = False
-
-            for _ in range(env.sizeY):
-                if flag_to_right:
-                    self.to_right()
-                else:
-                    self.to_left()
-
-                if corner[1] == 0: #(0,0)
-                    self.up()
-                else: #(0,sizeY-1)
-                    self.down()
-
-                if _ < env.sizeY-1:
-                    self.act()
-
-                flag_to_right = not(flag_to_right)
-
-        to_corner()
-        sweep()
