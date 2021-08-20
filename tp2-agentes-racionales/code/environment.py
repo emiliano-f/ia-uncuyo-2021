@@ -45,6 +45,7 @@ class Environment:
             self.posX = _posX
             self.posY = _posY
             self.dirt_tiles = round(_sizeX*_sizeY*_dirt_rate)
+            self.cleaned_tiles = 0
         else:
             self.__del__()
 
@@ -62,8 +63,13 @@ class Environment:
 
         return (self.posX, self.posY)
 
-    def get_performance(self):
-        return None
+    def get_performance(self) -> tuple:
+
+        return (self.dirt_tiles, self.cleaned_tiles, self.cleaned_tiles/self.dirt_tiles if self.dirt_tiles != 0 else None)
+
+    def cleaned(self) -> None:
+
+        self.cleaned_tiles += 1
 
     def print_environment(self) -> None:
 

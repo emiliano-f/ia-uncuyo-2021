@@ -76,6 +76,8 @@ class Agent:
 
         env: Environment = self.environment
         if self.has_actions():
+            if self.environment.floor[env.posY][env.posX]:
+                self.environment.cleaned()
             self.environment.floor[env.posY][env.posX] = False
             self.actions -= 1
 
