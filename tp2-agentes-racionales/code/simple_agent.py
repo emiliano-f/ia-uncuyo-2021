@@ -5,7 +5,7 @@ class SimpleAgent(Agent):
 
     def __init__(self, _environ: Environment):
 
-        Agent.__init__(self, _environ):
+        Agent.__init__(self, _environ)
 
     def think(self) -> None:
 
@@ -20,9 +20,9 @@ class SimpleAgent(Agent):
                 row = False # to left
 
             if env.sizeY - (env.posY +1) <= env.sizeY // 2:
-                col = True # to up
+                col = True # to down
             else:
-                col = False # to down
+                col = False # to up
 
             return (row,col)
 
@@ -30,17 +30,19 @@ class SimpleAgent(Agent):
 
             dest: tuple = nearest()
 
-            if dest[0]:
-                self.act()
-                self.to_right()
-            else:
-                self.act()
-                self.to_left()
+            if self.has_actions():
+                if dest[0]:
+                    self.act()
+                    self.to_right()
+                else:
+                    self.act()
+                    self.to_left()
 
-            if dest[1]:
-                self.to_up()
-            else:
-                self.to_down()
+            if self.has_actions():
+                if dest[1]:
+                    self.to_down()
+                else:
+                    self.to_up()
 
         def sweep() -> None:
 
@@ -59,14 +61,16 @@ class SimpleAgent(Agent):
                     self.to_left()
 
                 if corner[1] == 0: #(0,0)
-                    self.up()
-                else: #(0,sizeY-1)
                     self.down()
+                else: #(0,sizeY-1)
+                    self.up()
 
                 if _ < env.sizeY-1:
                     self.act()
 
                 flag_to_right = not(flag_to_right)
+                if not self.has_actions():
+                    break
 
         to_corner()
         sweep()

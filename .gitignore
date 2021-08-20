@@ -1,3 +1,6 @@
 ### Kate ###
 .*.kate-swp
 .swp.*
+
+### Py ###
+*.pyc

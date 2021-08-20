@@ -10,7 +10,7 @@ class RandomAgent(Agent):
 
     def think(self) -> None:
 
-        for _ in range(1000):
+        while self.has_actions():
             self.act()
             to = random.randint(0,3)
             if to == 0:

@@ -12,11 +12,11 @@ class Environment:
             """ Initialization of floor: clean """
             floor: list = []
             row: list = []
-            for _ in range(_sizeX):
-                for __ in range(_sizeY):
+            for _ in range(_sizeY):
+                for __ in range(_sizeX):
                     row.append(False)
                 floor.append(row)
-                row.clear()
+                row = []
             return floor
 
         def to_dirty(_floor: list):
@@ -31,19 +31,26 @@ class Environment:
             while count < tiles:
                 x = random.randint(0,randX)
                 y = random.randint(0,randY)
-                if not _floor[x][y]:
-                    _floor[x][y] = True
+                if not _floor[y][x]:
+                    _floor[y][x] = True
                     count += 1
             return _floor
 
-        self.floor = to_dirty(create())
-        self.initial_rate = _dirt_rate
-        self.dirt_rate = _dirt_rate
-        self.sizeX = _sizeX
-        self.sizeY = _sizeY
-        self.posX = _posX
-        self.posY = _posY
-        self.dirt_tiles = round(_sizeX*_sizeY*dirt_rate)
+        if _posX < _sizeX and _posY < _sizeY:
+            self.floor = to_dirty(create())
+            self.initial_rate = _dirt_rate
+            self.dirt_rate = _dirt_rate
+            self.sizeX = _sizeX
+            self.sizeY = _sizeY
+            self.posX = _posX
+            self.posY = _posY
+            self.dirt_tiles = round(_sizeX*_sizeY*_dirt_rate)
+        else:
+            self.__del__()
+
+    def __del__(self):
+
+        return None
 
     def is_dirty(self) -> tuple:
 
@@ -56,6 +63,7 @@ class Environment:
         return (self.posX, self.posY)
 
     def get_performance(self):
+        return None
 
     def print_environment(self) -> None:
 
