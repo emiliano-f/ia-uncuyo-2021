@@ -10,9 +10,9 @@ class BreadthSearchAgent(Agent):
                  _graph: Graph):
 
         Agent.__init__(self, _environ)
-        self.graph = _graph
+        self.graph = _graph.graph
 
-    def think(self) -> None:
+    def think(self) -> Queue:
 
         def solved(_goal: int):
             node: int = _goal
@@ -31,9 +31,7 @@ class BreadthSearchAgent(Agent):
             return solution
 
         frontier: Queue = Queue()
-        explored: Queue = Queue()
         frontier.appendleft(state)
-        adj: int
         node: Node
 
         while not frontier.is_empty():

@@ -26,6 +26,7 @@ class Graph:
             print("]")
 
     def load_environment(self, _env: Environment) -> None:
+        """ Load environment to graph """
 
         def perspective(_row: int, _col: int) -> tuple:
             """ Returns perspective: (up, down, left, right) """
@@ -58,6 +59,7 @@ class Link:
         self.head = None
         self.length = 0
         self.visited = None
+        self.parent = None
 
 class Node:
     def __init__(self,

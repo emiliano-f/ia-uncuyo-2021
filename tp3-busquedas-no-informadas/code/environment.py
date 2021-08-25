@@ -62,7 +62,7 @@ class Environment:
         return (self.posX, self.posY)
 
     def get_state(self, _row: int, _col: int) -> int:
-
+        """ Coordinates to state """
         return _row*(self.size)+_col
 
     def print_environment(self) -> None:
@@ -73,5 +73,10 @@ class Environment:
                 if self.floor[_][__]:
                     print("X|", end='')
                 else:
-                    print(" |", end='')
+                    if _ == self.initX and __ == self.initY:
+                        print("I|", end='')
+                    elif _ == self.destX and __ == self.destY:
+                        print("D|", end='')
+                    else:
+                        print(" |", end='')
             print("]")
