@@ -61,7 +61,7 @@ class Environment:
 
         return (self.posX, self.posY)
 
-    def get_tile_number(self, _row: int, _col: int) -> int:
+    def get_state(self, _row: int, _col: int) -> int:
 
         return _row*(self.size)+_col
 

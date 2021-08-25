@@ -38,15 +38,15 @@ class Graph:
         def adjacent(_row: int, _col: int) -> None:
 
             lim: tuple = perspective(_row, _col)
-            v: int = _env.get_tile_number(_row, _col)
+            v: int = _env.get_state(_row, _col)
             if not lim[0]:
-                self.add(v, _env.get_tile_number(_row-1,_col))
+                self.add(v, _env.get_state(_row-1,_col))
             if not lim[1]:
-                self.add(v, _env.get_tile_number(_row+1,_col))
+                self.add(v, _env.get_state(_row+1,_col))
             if not lim[2]:
-                self.add(v, _env.get_tile_number(_row, _col-1))
+                self.add(v, _env.get_state(_row, _col-1))
             if not lim[3]:
-                self.add(v, _env.get_tile_number(_row, _col+1))
+                self.add(v, _env.get_state(_row, _col+1))
 
         for _ in range(_env.size):
             for __ in range(_env.size):
@@ -57,6 +57,7 @@ class Link:
     def __init__(self):
         self.head = None
         self.length = 0
+        self.visited = None
 
 class Node:
     def __init__(self,
