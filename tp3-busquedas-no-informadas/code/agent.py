@@ -6,6 +6,7 @@ class Agent:
     def __init__(self,
             _environ : Environment):
         self.environment = _environ
+        self.states = 0
 
     def up(self) -> None:
 

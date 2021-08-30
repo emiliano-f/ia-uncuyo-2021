@@ -42,11 +42,11 @@ class Agent:
         return round(((_pos[0]-env.initX)**2 + (_pos[1]-env.initY)**2)**0.5)
 
     def load_heuristic(self) -> None:
-
-        for _ in range(self.environment.size):
-            for __ in range(self.environment.size):
-                if not self.environment.floor[_][__]:
-                    self.graph[self.environment.get_state(_,__)].heuristic = self.heuristic((_,__))
+        env: Environment = self.environment
+        for _ in range(env.size):
+            for __ in range(env.size):
+                if not env.floor[_][__]:
+                    self.graph[env.get_state(_,__)].heuristic = self.heuristic((_,__))
 
     def think(self) -> None:
 

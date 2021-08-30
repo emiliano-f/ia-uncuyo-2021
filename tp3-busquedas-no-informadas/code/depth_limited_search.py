@@ -22,7 +22,7 @@ class DepthLimitedSearchAgent(Agent):
             solution.append(state)
             return solution
 
-        return self.__rec_think(state, goal, 0, 10)
+        return self.__rec_think(state, goal, 0, 45)
 
 
     def __rec_think(self, _node: int, _goal: int, _i: int, _limit: int) -> Queue:
@@ -30,6 +30,7 @@ class DepthLimitedSearchAgent(Agent):
         if _i < _limit:
             node: Node = self.graph[_node].head
             self.graph[_node].visited = False
+            self.states += 1
             while node != None:
                 if self.graph[node.value].visited == None:
                     self.graph[node.value].parent = _node

@@ -36,6 +36,7 @@ class BreadthSearchAgent(Agent):
 
         while not frontier.is_empty():
             state = frontier.pop()
+            self.states += 1
             node = self.graph[state].head
             while node != None:
                 if self.graph[node.value].visited == None:

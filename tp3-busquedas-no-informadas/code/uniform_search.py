@@ -51,6 +51,7 @@ class UniformSearchAgent(Agent):
         while not frontier.empty():
             state = frontier.get()
             state = state[1]
+            self.states += 1
             self.graph[state].visited = True
             node = self.graph[state].head
             while node != None:

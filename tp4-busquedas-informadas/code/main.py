@@ -1,3 +1,4 @@
+from agent import Agent
 from environment import Environment
 from graph import Graph
 from random import randint
@@ -12,6 +13,7 @@ def main():
     #gr.show()
     env.print_environment()
 
+    ag: Agent = Agent(env, gr)
 
 if __name__ == "__main__":
     main()
