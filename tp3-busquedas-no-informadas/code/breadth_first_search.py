@@ -46,4 +46,4 @@ class BreadthSearchAgent(Agent):
                         return solved(goal)
                 node = node.next
             self.graph[state].visited = True
-
+        return None

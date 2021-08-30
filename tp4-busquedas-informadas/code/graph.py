@@ -1,5 +1,6 @@
 from environment import Environment
 import random
+
 class Graph:
 
     def __init__(self, _v: int):
@@ -54,6 +55,7 @@ class Graph:
                 if not _env.floor[_][__]:
                     adjacent(_,__)
 
+
 class Link:
     def __init__(self):
         self.head = None
@@ -61,6 +63,8 @@ class Link:
         self.visited = None
         self.parent = None
         self.accumulate = 0
+        self.heuristic = None
+
 class Node:
     def __init__(self,
                  _value: int = None,
