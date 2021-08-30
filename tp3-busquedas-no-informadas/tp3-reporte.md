@@ -7,16 +7,19 @@ Cada entorno generado tiene una proporción de 0.3 obstáculos, en una dimensió
 ## Agente mediante búsqueda en anchura:
 
 Media: 3380.04
+
 Desviación estándar: 2025.08
 
 ## Agente en búsqueda uniforme:
 
 Media: 4089.74
+
 Desviación estándar: 2750.39
 
 ## Agente en búsqueda en profundidad:
 
 Media 245.33
+
 Desviación estándar: 142.47
 
 ## Graficos
@@ -24,6 +27,7 @@ Desviación estándar: 142.47
 ![report](report.png?raw=true "Title")
 
 En rojo: media. En azul: desviación estándar.
+
 BFS (1), US (2), DLS (3).
 
 ## Conclusión
