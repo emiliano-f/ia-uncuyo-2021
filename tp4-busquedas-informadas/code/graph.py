@@ -19,7 +19,7 @@ class Graph:
         """ Print graph """
 
         for _ in range(len(self.graph)):
-            print("V:",_, "; length:", self.graph[_].length, "\n[",end="")
+            print("V:",_, "; length:", self.graph[_].length, "; heuristic:", self.graph[_].heuristic, "\n[",end="")
             node: Node = self.graph[_].head
             for __ in range(self.graph[_].length):
                 print(node.value, end=",")
@@ -64,6 +64,7 @@ class Link:
         self.parent = None
         self.accumulate = 0
         self.heuristic = None
+        self.accum_heur = 0
 
 class Node:
     def __init__(self,
