@@ -16,35 +16,55 @@ class HillClimbingStd(Board):
 
         def update_min() -> None:
             for r in range(len(self.table)):
-                for c in range (len(minimum)):
-                    if self.board[c] != r:
-                        if minimum[1][c] > self.table[r][c]:
+                for c in range (len(minimum[0])):
+                    if self.board[c] != r: # Extract min from neighbors in col
+                        if minimum[1][c] >= self.table[r][c]:
                             minimum[0][c] = r
                             minimum[1][c] = self.table[r][c]
 
-        def extract_min() -> tuple:
-            ret: int = minimum[0][0]
-            fn: int = minimum[1][0]
-            pos: int = 0
+        def extract_min(_last: int) -> tuple:
+            row: int
+            fn: int
+            pos: int
+            if _last != 0:
+                row = minimum[0][0]
+                fn = minimum[1][0]
+                pos = 0
+            else:
+                row = minimum[0][1]
+                fn = minimum[1][1]
+                pos = 1
+
             for _ in range(1, len(minimum[0])):
-                if fn > minimum[1][_]:
-                    ret = minimum[0][_]
+                if _last != _ and fn > minimum[1][_]:
+                    row = minimum[0][_]
                     fn = minimum[1][_]
                     pos = _
-            return (pos, ret, fn)
+            return (pos, row, fn)
 
         self.update_fn()
         self.update()
-        minimum = [[self.board[_] for _ in self.board], # [Rows]
+        minimum = [[_ for _ in self.board], # [Rows]
                     [self.get_fn() for _ in self.board]] # [Obj Fn]
+        last: int = None
         new: int
+        lss: list = []
+
+        lss.append(self.get_fn())
+
         while self.states > 0:
             update_min()
-            new = extract_min()
-            if new[2] > self.get_fn():
-                break
+            new = extract_min(last)
+            #if new[2] > self.get_fn(): # Never happens
+            #    break
             self.board[new[0]] = new[1]
             self.update_fn()
             self.update()
             self.states -= 1
+            last = new[0]
+            if new[2] == 0:
+                break
+
+            lss.append(self.get_fn())
+        print(lss)
         return self.board
