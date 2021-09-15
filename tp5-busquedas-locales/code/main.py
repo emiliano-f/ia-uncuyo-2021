@@ -1,5 +1,6 @@
 from hill_climbing_std import HillClimbingStd
 from simulated_annealing import SimulatedAnnealing
+from genetic import Genetic
 
 def main():
     bot: HillClimbingStd = HillClimbingStd(16, 50)
@@ -8,6 +9,9 @@ def main():
 
     sa: SimulatedAnnealing = SimulatedAnnealing(16)
     print(sa.think(), bot.get_fn())
+
+    gen: Genetic = Genetic(8, 20, 10, 3)
+    print(gen.think())
 
 if __name__ == "__main__":
     main()

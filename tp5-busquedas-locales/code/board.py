@@ -107,7 +107,6 @@ class Board:
 
         for _ in range(len(self.board)):
             self.table[self.board[_]][_] = self.get_fn()
-        return self.get_fn()
 
     def get_fn(self) -> int:
         return self.__fn_obj
