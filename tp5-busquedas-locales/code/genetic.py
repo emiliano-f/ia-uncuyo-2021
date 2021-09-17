@@ -7,132 +7,6 @@
 
 from random import random, randint
 
-class Genetic:
-    def __init__(self,
-                 _size_board: int,
-                 _pobl_size: int,
-                 _parents_size: int,
-                 _max_mutation: int):
-
-        self.individuals = [Board(_size_board) for _ in range(_pobl_size)]
-        self.size_board = _size_board
-        self.size_parents = _parents_size
-        self.max_mutation = _max_mutation
-        self.mutation_probability = 0.10
-        self.average = 0.0
-
-    def __list_average__(self) -> None:
-            summa: float = 0.0
-            for _ in self.individuals:
-                summa += _.get_fn()
-            self.average = summa / len(self.individuals)
-
-    def __check__(self, _boards: list) -> bool:
-        for _ in range(len(_boards)):
-            if _boards[_].get_fn() == 0:
-                return True
-        return False
-
-    def think(self) -> bool:
-
-        def select_parents() -> list:
-            """ Proportional selection """
-
-            k: int = 10
-            idx: int = 0
-            length: int = len(self.individuals)
-            probability: float = 0.35
-            select: list = []
-            while k > 0:
-                self.individuals[idx]
-                if random() < probability:
-                    select.append(self.individuals[idx])
-                    k -= 1
-                idx = (idx + 1) % length
-            return select
-
-        def crossover(_parents: list) -> list:
-            """ Three points """
-
-            def update_descendants() -> None:
-                for _ in range(self.size_parents):
-                    descendants[_].update_fn()
-
-            # Points: 1, 3, 5
-            descendants: list[Board] = []
-            children: tuple[list, list]
-            i: int
-            for _ in range(len(_parents) // 2):
-                children = ([],[])
-                fst: list = _parents[2*_]
-                snd: list = _parents[2*_+1]
-                i = 0
-                for __ in range(self.size_board):
-                    children[i%2].append(fst.board[__])
-                    children[(i+1)%2].append(snd.board[__])
-                    if __ % 2:
-                        i += 1
-                descendants.append(Board(0,children[0]))
-                descendants.append(Board(0,children[1]))
-
-            update_descendants()
-            return descendants
-
-        def replacement(_descendants: list) -> None:
-            """ Replacement of below-average performers """
-
-            idx: int = 0
-            for _ in range(len(self.individuals)):
-                if self.individuals[_].get_fn() < self.average:
-                    self.individuals[_] = _descendants[idx]
-                    idx += 1
-                    if idx >= len(_descendants):
-                        break
-            self.__list_average__()
-
-        def mutation() -> bool: # Temporal value
-            """ If there is mutation, choose randomly """
-
-            def mutate(_board: Board) -> None:
-                """  """
-
-                i: int
-                k: int = 2
-                top_idx: int = self.size_board - 1
-                for _ in range(k):
-                    i = randint(0, top_idx)
-                    _board.board[i] = randint(0, top_idx)
-
-            idx: int
-            temp: list = []
-            max_idx: int = len(self.individuals) - 1
-            for _ in range(self.max_mutation):
-                idx = randint(0, max_idx)
-                mutate(self.individuals[idx])
-                self.individuals[idx].update_fn()
-                temp.append(self.individuals[idx])
-            if self.__check__(temp):
-                return True
-            return False
-
-        # Initialization -> Average and solution check
-        self.__list_average__()
-        if self.__check__(self.individuals):
-            return True
-
-        for _ in range(1000):
-            parents: list = select_parents()
-            descendants: list = crossover(parents)
-            if self.__check__(descendants):
-                return True
-            replacement(descendants)
-            if random() <= self.mutation_probability:
-                value = mutation()
-                if value:
-                    return True
-            self.__list_average__()
-        return False
-
 class Board:
 
     def __init__(self,
@@ -179,3 +53,125 @@ class Board:
 
     def get_fn(self) -> int:
         return self.__fn_obj
+
+class Genetic:
+    def __init__(self,
+                 _size_board: int,
+                 _pobl_size: int,
+                 _parents_size: int,
+                 _max_mutation: int):
+
+        self.individuals = [Board(_size_board) for _ in range(_pobl_size)]
+        self.size_board = _size_board
+        self.size_poblat = _pobl_size
+        self.size_parents = _parents_size
+        self.max_mutation = _max_mutation
+        self.mutation_probability = 0.10
+        self.average = 0
+
+    def __list_average__(self) -> None:
+            summa: float = 0.0
+            for _ in self.individuals:
+                summa += _.get_fn()
+            self.average = summa / len(self.individuals)
+
+    def __check__(self, _boards: list[Board]) -> bool:
+        for _ in range(len(_boards)):
+            if _boards[_].get_fn() == 0:
+                return True
+        return False
+
+    def __select_parents__(self) -> list[Board]:
+        """ Proportional selection """
+
+        idx: int = 0 # Index for self.individuals
+        k: int = self.size_parents # Index for parents selected
+        probability: float = 0.35 # Probability of be selected
+        select: list[Board] = []
+        while k > 0:
+            self.individuals[idx]
+            if random() <= probability:
+                select.append(self.individuals[idx])
+                k -= 1
+            idx = (idx + 1) % self.size_poblat
+        return select
+
+    def __crossover__(self, _parents: list[Board]) -> list[Board]:
+        """ One point """
+
+        descendants: list[Board] = [] # New children
+        children: tuple[list, list] # Pair generated
+
+        for _ in range(self.size_parents // 2):
+            children = ([],[])
+            fst: list = _parents[2*_].board
+            snd: list = _parents[2*_+1].board
+            for __ in range(self.size_board // 2):
+                children[0].append(fst[__])
+                children[1].append(snd[__])
+            for __ in range(self.size_board // 2, self.size_board):
+                children[1].append(fst[__])
+                children[0].append(snd[__])
+
+            descendants.append(Board(0,children[0]))
+            descendants.append(Board(0,children[1]))
+
+        return descendants
+
+    def __replacement__(self, _descendants: list[Board]) -> None:
+        """ Replacement of above-average performers """
+
+        idx: int = 0 # Index for _descendants
+        for _ in range(self.size_poblat):
+            if self.individuals[_].get_fn() > self.average:
+                self.individuals[_] = _descendants[idx]
+                idx += 1
+                if idx >= self.size_parents: # len(_descendants)
+                    break
+        self.__list_average__()
+
+    def __mutation__(self) -> bool: # Temporal value
+        """ If there is mutation, choose randomly """
+
+        def mutate(_board: Board) -> None:
+            """ Mutate elements on board: k elements """
+
+            i: int # Index of mutation
+            k: int = 2 # elements to mutate
+            top_idx: int = self.size_board - 1
+            for _ in range(k):
+                i = randint(0, top_idx)
+                _board.board[i] = randint(0, top_idx)
+
+        idx: int # Index for individuals
+        temp: list = [] # Check individuals
+        max_idx: int = self.size_poblat - 1
+        for _ in range(self.max_mutation):
+            idx = randint(0, max_idx)
+            mutate(self.individuals[idx])
+            self.individuals[idx].update_fn()
+            temp.append(self.individuals[idx])
+        if self.__check__(temp):
+            return True
+        return False
+
+    def think(self) -> bool:
+
+        # Initialization -> Average and solution check
+        self.__list_average__()
+        if self.__check__(self.individuals):
+            return True
+
+        for _ in range(10000):
+            parents: list = self.__select_parents__()
+            descendants: list = self.__crossover__(parents)
+            if self.__check__(descendants):
+                return True
+            self.__replacement__(descendants)
+            if random() <= self.mutation_probability:
+                value = self.__mutation__()
+                if value:
+                    return True
+            self.__list_average__()
+        return False
+
