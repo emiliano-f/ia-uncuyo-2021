@@ -2,11 +2,11 @@
 
 ## Resultados de las diversas ejecuciones
 
-Ver results.csv
+Ver [results.csv](results.csv)
 
 ## Gráfico
 
-![graph_function](graph_function.png?raw=true "Title")
+![graphic_function](graphic_function.png?raw=true "Title")
 
 ## Algoritmo más adecuado
 
