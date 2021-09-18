@@ -84,9 +84,9 @@ class Genetic:
     def __select_parents__(self) -> list[Board]:
         """ Proportional selection """
 
-        idx: int = 0 # Index for self.individuals
-        k: int = self.size_parents # Index for parents selected
-        probability: float = 0.35 # Probability of be selected
+        idx: int = 0                # Index for self.individuals
+        k: int = self.size_parents  # Index for parents selected
+        probability: float = 0.35   # Probability of be selected
         select: list[Board] = []
         while k > 0:
             self.individuals[idx]
@@ -136,15 +136,15 @@ class Genetic:
         def mutate(_board: Board) -> None:
             """ Mutate elements on board: k elements """
 
-            i: int # Index of mutation
-            k: int = 2 # elements to mutate
+            i: int                      # Index of mutation
+            k: int = 2                  # elements to mutate
             top_idx: int = self.size_board - 1
             for _ in range(k):
                 i = randint(0, top_idx)
                 _board.board[i] = randint(0, top_idx)
 
-        idx: int # Index for individuals
-        temp: list = [] # Check individuals
+        idx: int                # Index for individuals
+        temp: list = []         # Check individuals
         max_idx: int = self.size_poblat - 1
         for _ in range(self.max_mutation):
             idx = randint(0, max_idx)
@@ -155,23 +155,29 @@ class Genetic:
             return True
         return False
 
-    def think(self) -> bool:
+    def think(self) -> tuple[bool, int]:
+
+        ######## Part II
+        prev_status: int = 20
+        ################
 
         # Initialization -> Average and solution check
         self.__list_average__()
         if self.__check__(self.individuals):
-            return True
+            return (True, prev_status)
 
-        for _ in range(10000):
+        for _ in range(1000):
             parents: list = self.__select_parents__()
             descendants: list = self.__crossover__(parents)
+            prev_status += 10
             if self.__check__(descendants):
-                return True
+                return (True, prev_status)
             self.__replacement__(descendants)
             if random() <= self.mutation_probability:
+                prev_status += 3
                 value = self.__mutation__()
                 if value:
-                    return True
+                    return (True, prev_status)
             self.__list_average__()
-        return False
+        return (False, prev_status)
 

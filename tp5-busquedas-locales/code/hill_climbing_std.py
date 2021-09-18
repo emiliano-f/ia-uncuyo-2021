@@ -1,4 +1,5 @@
 from board import Board
+import csv
 
 class HillClimbingStd(Board):
 
@@ -48,9 +49,12 @@ class HillClimbingStd(Board):
                     [self.get_fn() for _ in self.board]] # [Obj Fn]
         last: int = None
         new: int
-        lss: list = []
 
-        lss.append(self.get_fn())
+        ## Part II
+        prv_stts: list = [] # Previous states
+        prv_stts.append(self.get_fn())
+        success: bool = False
+        ##
 
         while self.states > 0:
             update_min()
@@ -63,8 +67,9 @@ class HillClimbingStd(Board):
             self.states -= 1
             last = new[0]
             if new[2] == 0:
+                success = True
                 break
 
-            lss.append(self.get_fn())
-        print(lss)
-        return self.board
+            prv_stts.append(self.get_fn())
+
+        return (success,prv_stts)

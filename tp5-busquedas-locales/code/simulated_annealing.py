@@ -62,6 +62,10 @@ class SimulatedAnnealing(Board):
         dif2: int = 0
         diff: int
 
+        # Part II
+        part_status: list = []
+        part_status.append(self.get_fn())
+
         while self.get_fn() > 0 and iterat < 100: #Determining limit
 
             iterat += 1
@@ -72,5 +76,6 @@ class SimulatedAnnealing(Board):
                 accept()
                 dif2 = dif1
                 dif1 = self.get_fn()
-            else:
-                continue
+            part_status.append(self.get_fn())
+
+        return (self.get_fn() == 0, part_status)
