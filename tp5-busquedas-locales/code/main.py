@@ -7,7 +7,7 @@ import statistics
 
 def main():
     rep: int = 30
-    tam: int = 15
+    tam: int = 8
     ##################################### Hill Climbing
 
     times_hc = []
@@ -54,6 +54,7 @@ def main():
 
     times_ag = []
     prev_status = [] #cant_status
+    h_function = []
     success_ag = 0
     for _ in range (rep):
         gen: Genetic = Genetic(tam, 20, 10, 3)
@@ -61,12 +62,15 @@ def main():
         tupla = gen.think()
         times_ag.append(time() - init)
         prev_status.append(tupla[1])
+        h_function.append(tupla[2])
         if tupla[0]:
             success_ag += 1
 
     with open("ag.csv", "w") as csv_file:
         ag_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         ag_writer.writerow(prev_status)
+        for _ in h_function:
+            ag_writer.writerow(_) # h() function in each generation
 
     with open("statistics.txt", "w") as _file:
         _file.write("1. Hill Climbing \n2. Simulated Annealing \n3. Genetic Algorithm\n")

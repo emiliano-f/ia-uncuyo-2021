@@ -155,29 +155,40 @@ class Genetic:
             return True
         return False
 
+    def __minimum__(self) -> int:
+        """ Extract minimum in each new generation """
+
+        minim: list = []
+        for _ in self.individuals:
+            minim.append(_.get_fn())
+        return min(minim)
+
     def think(self) -> tuple[bool, int]:
 
         ######## Part II
         prev_status: int = 20
+        fn: int = []
         ################
 
         # Initialization -> Average and solution check
         self.__list_average__()
+        fn.append(self.__minimum__())
         if self.__check__(self.individuals):
-            return (True, prev_status)
+            return (True, prev_status, fn)
 
         for _ in range(1000):
             parents: list = self.__select_parents__()
             descendants: list = self.__crossover__(parents)
             prev_status += 10
             if self.__check__(descendants):
-                return (True, prev_status)
+                return (True, prev_status, fn)
             self.__replacement__(descendants)
             if random() <= self.mutation_probability:
                 prev_status += 3
                 value = self.__mutation__()
                 if value:
-                    return (True, prev_status)
+                    return (True, prev_status, fn)
             self.__list_average__()
-        return (False, prev_status)
+            fn.append(self.__minimum__())
+        return (False, prev_status, fn)
 
