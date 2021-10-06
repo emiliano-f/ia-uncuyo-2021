@@ -12,8 +12,6 @@ def main():
         #print(backtracking_csp(backtracking))
 
         ## Forward Checking
-        print(size)
-        input()
         fc_board: BoardFC = BoardFC(size)
         print(forward_checking(fc_board))
 

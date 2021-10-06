@@ -21,8 +21,6 @@ def forward_checking(_csp: BoardFC) -> list:
         to_restore = removed.pop()
         col = to_restore[0]
         row = to_restore[1]
-        print("To restore: ", col, row, assignment)
-        #input()
         restore(_csp, to_restore, assignment)
 
         # Assignment in columns
@@ -31,9 +29,6 @@ def forward_checking(_csp: BoardFC) -> list:
             column = _csp.board[col]
             while row < len(_csp.board) and not column.domain[row]:
                 row += 1 # Try this when element isnt in domain
-
-            print("Col:Row selected: ", col, ":", row)
-            print("column.domain: \n", column.domain)
 
             if row < len(_csp.board): # if T, also column.domain[row] is T
                 assignment.append(row)
@@ -56,6 +51,8 @@ def restore(_csp: BoardFC, _to_restore: tuple, _assignment: list) -> None:
     _assignment.pop()
     col: int = _to_restore[0]
     row: int = _to_restore[1]
+    if row < 0:
+        return
 
     diag_up: int
     diag_down: int
@@ -67,15 +64,15 @@ def restore(_csp: BoardFC, _to_restore: tuple, _assignment: list) -> None:
         # Restore element in domain        print(size)
         diag_up = row - i
         if diag_up > -1:
-            queen.restore_domain_element(queen, diag_up)
+            queen.restore_domain_element(diag_up)
 
         # Restore element in domain
         diag_down = row + i
         if diag_down < len(_csp.board):
-            queen.restore_domain_element(queen, diag_down)
+            queen.restore_domain_element(diag_down)
 
         # Restore same row in domain
-        queen.restore_domain_element(queen, row)
+        queen.restore_domain_element(row)
         i += 1
 
 def delete_forward(_csp: BoardFC, _row: int, _col: int) -> tuple:
@@ -91,20 +88,19 @@ def delete_forward(_csp: BoardFC, _row: int, _col: int) -> tuple:
         # Delete element in domain
         diag_up = _row - i
         if diag_up > -1:
-            queen.delete_domain_element(queen, diag_up)
+            queen.delete_domain_element(diag_up)
 
         # Delete element in domain
         diag_down = _row + i
         if diag_down < len(_csp.board):
-            queen.delete_domain_element(queen, diag_down)
+            queen.delete_domain_element(diag_down)
 
         # Delete same row in domain
-        queen.delete_domain_element(queen, _row)
+        queen.delete_domain_element(_row)
 
-        if queen.length < 0:
+        if queen.length <= 0:
             alert = True
         i += 1
-        print(queen.domain)
 
-    print("\n")
     return (alert, (_col, _row))
+
