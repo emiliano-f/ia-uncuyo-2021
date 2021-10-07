@@ -33,4 +33,49 @@ La complejidad en un árbol estructurado CSP es O(nd^2) pero si consideramos que
 
 ## Si por cada arco (Xk,Xi) se lleva cuenta del número de valores que quedan de Xi que sean consistentes con Xk, explicar como actualizar ese número de manera eficiente y demostrar que la arco consistencia puede lograrse en un tiempo total O(n^2d^2)
 
+La actualización del número de valores consistentes puede realizarse disminuyendo en una unidad cada que se quite un arco. Esto tiene una complejidad de O(1) y para la totalidad de los arcos O(d) siempre que todos ellos se encuentren afectados según la naturaleza del problema. No obstante, esto no implica agregar d veces un arco a la cola, sino que no es agregado. por lo que la complejidad restante es de la consistencia de arco. En conclusión, la complejidad es de O(n^2d^2)
 
+## Demostrar la correctitud del algoritmo CSP para árboles estructurados
+
+a. Los pasos desarrollados en el libro tienen como objetivo reducir un problema de n-consistencia a uno de 2-consistencia (arco consistencia). Si los nodos se ordenan tal como lo requiere el algoritmo, entonces la comprobación de arco-consistencia en orden inverso logra que cualquier valor suprimido posteriormente no coloca en peligro la consistencia de arcos que ya han sido tratados. En conclusión, la 2-consistencia puede resolver una n-consistencia dadas las hipótesis.
+
+b. Esto es así debido a que en el algoritmo AC-3, los arcos reinsertados corresponden a los pares (Xk, Xi) donde Xi contiene el dominio de elementos recientemente suprimidos (en el análisis de (Xi,Xj)). En otras palabras, para que un valor suprimido pudiera afectar la consistencia ya lograda, los arcos reinsertados en AC-3 deberían involucrar elementos de Xj.
+
+## Tiempos de ejecución
+
+Promedios (los datos en bruto se encuentran en out_bt.csv y out_fc.csv para backtracking y forward checking respectivamente).
+
+|     | Backtracking | Forward checking |
+|:--: |:------------:|:----------------:|
+|4 | 6.516218185424805e-05 | 9.282112121582031e-05 |
+|8 | 0.0012094879150390625 | 0.0011130285263061524 |
+|10 | 0.001434159278869629 | 0.001191246509552002 |
+|12 | 0.004759273529052734 | 0.003332078456878662 |
+|15 | 0.03411295652389526 | 0.02230879306793213 |
+
+## Cantidad de estados recorridos
+
+|     | Backtracking | Forward checking |
+|:--: |:------------:|:----------------:|
+|4 | 26 | 8|
+|8 | 876 | 88|
+|10 | 975 | 83|
+|12 | 3066 | 193|
+|15 | 20280 | 1026|
+
+## Gráfico de cajas
+
+### Size: 4
+![size4](size4.png?raw=true "Title")
+
+### Size: 8
+![size8](size8.png?raw=true "Title")
+
+### Size: 10
+![size10](size10.png?raw=true "Title")
+
+### Size: 12
+![size12](size12.png?raw=true "Title")
+
+### Size: 15
+![size15](size15.png?raw=true "Title")

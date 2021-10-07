@@ -3,6 +3,8 @@ from dque import Queue
 
 def forward_checking(_csp: BoardFC) -> list:
 
+    states: int = 0
+
     assignment: list = []
     removed: Queue = Queue()
 
@@ -10,7 +12,7 @@ def forward_checking(_csp: BoardFC) -> list:
     row: int
     save: tuple
     column: Link
-    to_restore: list[tuple]
+    to_restore: list[tuple[int,int]]
 
     # First iteration
     removed.append((0, -1))
@@ -31,6 +33,8 @@ def forward_checking(_csp: BoardFC) -> list:
                 row += 1 # Try this when element isnt in domain
 
             if row < len(_csp.board): # if T, also column.domain[row] is T
+                states += 1
+
                 assignment.append(row)
                 save = delete_forward(_csp, row, col)
                 removed.append(save[1])
@@ -43,8 +47,8 @@ def forward_checking(_csp: BoardFC) -> list:
             row = -1
 
         if len(assignment) == len(_csp.board):
-            return assignment
-    return []
+            return (states, assignment)
+    return (states, [])
 
 def restore(_csp: BoardFC, _to_restore: tuple, _assignment: list) -> None:
 
@@ -56,7 +60,7 @@ def restore(_csp: BoardFC, _to_restore: tuple, _assignment: list) -> None:
 
     diag_up: int
     diag_down: int
-    queen_domain: list
+    queen: list
     i: int = 1
     for _ in range(col+1, len(_csp.board)):
         queen = _csp.board[_]
