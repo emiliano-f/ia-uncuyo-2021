@@ -5,7 +5,9 @@
 CSP = (X, D, C):
 
 X = {Xij}, 1<=i<=9, 1<=j<=9.
+
 D = {Dij}, Dij = {1,2,3,4,5,6,7,8,9} 1<=i<=9, 1<=j<=9.
+
 C = {Row(Xij), Col(Xij)}, Row = {Alldiff(Xij)}, 1<=i<=9, Col = {Alldiff(Xij)}, 1<=j<=9.
 
 ## Detectar la inconsistencia de la asignación parcial {WA = red, V = blue} con el algoritmo AC-3.
