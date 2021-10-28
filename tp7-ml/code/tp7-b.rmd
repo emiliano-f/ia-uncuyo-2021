@@ -1,0 +1,168 @@
+---
+title: "Trabajo Practico 7 - Parte B"
+output: html_notebook
+---
+
+Arbolado
+
+```{r}
+library(dplyr)
+library(readr)
+library(ggcorrplot)
+library(caret)
+library(rpart)
+library(randomForest)
+
+train <- read_csv("./data/arbolado-mza-dataset.csv")
+valid <- read_csv("./data/arbolado-mza-dataset-test.csv")
+
+train
+
+train$inclinacion_peligrosa <- as.factor(train$inclinacion_peligrosa)
+```
+
+```{r}
+
+#drops <- c(ultima_modificacion, 
+#           nombre_seccion)
+#train[,!(names(train) %in% drops)] dont works.
+train <- subset(train, select=-c(ultima_modificacion,
+                                 nombre_seccion))
+valid <- subset(valid, select=-c(ultima_modificacion,
+                                 nombre_seccion))
+train
+
+```
+
+Proporcionado de positivos y negativos
+
+```{r}
+pos <- train %>% filter(inclinacion_peligrosa == 1)
+neg <- train %>% filter(inclinacion_peligrosa == 0)
+
+t <- nrow(neg) + nrow(pos)
+n <- round(nrow(neg) * nrow(pos) / t * 1.3)
+splitted <- sample(1:nrow(neg), 
+                   size = n, 
+                   replace = F)
+neg <- neg[splitted,]
+train <- rbind(neg,pos)
+```
+
+Inclinación peligrosa segun latitud y longitud
+
+```{r}
+
+# Division de areas
+minim_long <- min(train$long)
+maxim_long <- max(train$long)
+minim_lat <- min(train$lat)
+maxim_lat <- max(train$lat)
+
+lat_length <- 30
+long_length <- 100
+lat_brk <- seq(minim_lat, maxim_lat, length=lat_length)
+lat_lbl <- c(1:(lat_length-1))
+long_brk <- seq(minim_long, maxim_long, length=long_length)
+long_lbl <- c(1:(long_length-1)) 
+
+# Creacion de nuevas columnas
+train$area_lat = cut(train$lat, breaks=lat_brk, labels=lat_lbl)
+train$area_long = cut(train$long, breaks=long_brk, labels=long_lbl)
+
+valid$area_lat = cut(valid$lat, breaks=lat_brk, labels=lat_lbl)
+valid$area_long = cut(valid$long, breaks=long_brk, labels=long_lbl)
+
+# Calculo de proporciones
+total_lat <- train %>% 
+             group_by(area_lat) %>%
+             summarise(dang = sum(inclinacion_peligrosa==1),
+                       total = n())
+
+prop_lat <- data.frame(area_lat = total_lat$area_lat, 
+                       prop_lt = total_lat$dang/total_lat$total)
+
+total_long <- train %>% 
+              group_by(area_long) %>%
+              summarise(dang = sum(inclinacion_peligrosa==1),
+                        total = n())
+
+prop_long <- data.frame(area_long = total_long$area_long, 
+                        prop_lg = total_long$dang/total_long$total)
+
+# Combinacion de datasets
+train <- merge(train, prop_lat, by = "area_lat")
+train <- merge(train, prop_long, by = "area_long")
+
+valid <- merge(valid, prop_lat, by = "area_lat")
+valid <- merge(valid, prop_long, by = "area_long")
+```
+
+Grafico de las nuevas columnas filtradas por inclinación peligrosa
+
+```{r}
+to_graph <- train %>% group_by(area_lat, inclinacion_peligrosa=1) %>% summarise(total=n())
+
+ggplot(to_graph,aes(x=area_lat,y=total)) +
+      geom_bar(stat="identity") +
+      labs(x = "Zona Latitud",
+           y = "Total") +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+to_graph <- train %>% group_by(area_long, inclinacion_peligrosa=1) %>% summarise(total=n())
+
+ggplot(to_graph,aes(x=area_long,y=total)) +
+      geom_bar(stat="identity") +
+      labs(x = "Zona Longitud",
+           y = "Total") +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+Especie más peligrosa
+
+```{r}
+
+esp <- train %>%
+       group_by(especie) %>%
+       summarise(total = n(),
+                 dang = sum(inclinacion_peligrosa == 1))
+prop_esp <- data.frame(especie = esp$especie, 
+                       prop_esp = esp$dang/esp$total)
+
+train <- merge(train, prop_esp, by = "especie")
+valid <- merge(valid, prop_esp, by = "especie")
+
+to_graph <- train %>% group_by(especie, inclinacion_peligrosa=1) %>% summarise(total=n())
+
+ggplot(to_graph,aes(x=especie,y=total)) +
+      geom_bar(stat="identity") +
+      labs(x = "Especie",
+           y = "Total") +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+Altura, especie, circunferencia del tronco.
+
+```{r}
+
+```
+
+Aplicación de RandomForest
+
+```{r}
+
+rf <- randomForest(inclinacion_peligrosa ~ prop_lg +
+                                           prop_lt +
+                                           prop_esp +
+                                           altura +
+                                           diametro_tronco,
+                                              data = train,
+                                              ntree = 700)
+
+inclinacion_peligrosa <- predict(rf, newdata = valid)
+rf
+inclinacion_peligrosa <- as.numeric(as.character(inclinacion_peligrosa))
+results <- data.frame(id = valid$id,inclinacion_peligrosa)
+write.csv(results, "submss.csv")
+```
