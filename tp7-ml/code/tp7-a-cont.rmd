@@ -45,10 +45,11 @@ Cálculo matriz de confusión - random_classifier
 ```{r}
 matrix_conf <- function(dataf){
   true_positive <- dataf %>% filter(inclinacion_peligrosa == 1 & prediction_class == 1)
+  false_positive <- dataf %>% filter(inclinacion_peligrosa == 1 & prediction_class == 0)
+  false_negative <- dataf %>% filter(inclinacion_peligrosa == 0 & prediction_class == 1)
   true_negative <- dataf %>% filter(inclinacion_peligrosa == 0 & prediction_class == 0)
-  false_positive <- dataf %>% filter(inclinacion_peligrosa == 0 & prediction_class == 1)
-  false_negative <- dataf %>% filter(inclinacion_peligrosa == 1 & prediction_class == 0)
-  return(c(nrow(true_positive), nrow(false_positive), nrow(false_negative), nrow(true_negative)))
+  
+  return(c(nrow(true_positive), nrow(false_positive), nrow(true_negative),  nrow(false_negative)))
 }
 
 mat <- matrix_conf(to_validate)
@@ -80,9 +81,9 @@ Métricas
 
 ```{r}
 metrics <- function(conf_mat){
-  sensitivity <- conf_mat[1] / (conf_mat[1] + conf_mat[3])
-  specificity <- conf_mat[4] / (conf_mat[4] + conf_mat[2])
-  precision <- conf_mat[1] / (conf_mat[1] + conf_mat[2])
+  sensitivity <- conf_mat[1] / (conf_mat[1] + conf_mat[2])
+  specificity <- conf_mat[4] / (conf_mat[4] + conf_mat[3])
+  precision <- conf_mat[1] / (conf_mat[1] + conf_mat[3])
   accuracy <- (conf_mat[1] + conf_mat[4]) / (conf_mat[1] + conf_mat[4] + conf_mat[2] + conf_mat[3])
   return(c(sensitivity, specificity, precision, accuracy))
 }
@@ -96,14 +97,29 @@ major
 Validación cruzada
 
 ```{r}
+library(rpart)
+
 create_folds <- function(dataframe, n){
   rows = nrow(dataframe)
   data_partition <- ceiling(rows/n)
-  datasplit <- split(dataframe, sample(rep(1:n, data_partition)))
+  datasplit <- split(dataframe, sample(rep(1:n, data_partition))) #return list
+  print(datasplit)
   return(datasplit)
 }
 
 cross_validation <- function(dataframe, n){
+
+  folds <- create_folds(dataframe, n)
+  train_formula <- formula(inclinacion_peligrosa ~ altura +
+                                                   diametro_tronco +
+                                                   lat +
+                                                   long + 
+                                                   especie)
   
-}
+  for (i in 1:n){
+    
+  }
+
 ```
+
+The models fit by, e.g., the lm and glm functions are specified in a compact symbolic form. The ~ operator is basic in the formation of such models. An expression of the form y ~ model is interpreted as a specification that the response y is modelled by a linear predictor specified symbolically by model. Such a model consists of a series of terms separated by + operators. The terms themselves consist of variable and factor names separated by : operators. Such a term is interpreted as the interaction of all the variables and factors appearing in the term.
