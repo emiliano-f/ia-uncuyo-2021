@@ -1,0 +1,110 @@
+---
+title: "Trabajo Practico 7 - Parte A"
+output: html_notebook
+---
+
+Introduccion
+
+```{r}
+# For manipulating the datasets
+library(dplyr)
+library(readr)
+
+# Loading dataset
+path_read <- "/home/emiliano/IA/tp7/arbolado-mza-dataset.csv/arbolado-mza-dataset.csv"
+trees <- read_csv(path_read)
+
+# Machine Learning library
+library(caret)
+
+# Índices de la muestra de entrenamiento
+trainIndex <- createDataPartition(as.factor(trees$inclinacion_peligrosa), # Required by createDataPartition 
+                                  p=.8,
+                                  list = FALSE,
+                                  times = 1)
+train <- trees[ trainIndex,] # Subset extracted as dataset 
+valid <- trees[-trainIndex,] # All values except trainIndex
+
+# Save
+
+write.csv(train,"arbolado-publico-mendoza-2021-train.csv")
+write.csv(valid,"arbolado-publico-mendoza-2021-valid.csv")
+
+# For plotting correlation matrix
+library(ggcorrplot)
+# For Multi-core processing support
+library(doMC)
+registerDoMC(cores=4)
+
+```
+
+Distribución de la clase inclinacion_peligrosa.
+
+```{r}
+# head(first_data_frame) #Show in console mode
+# View(train) #Interactive mode
+
+to_graph <- train %>% group_by(inclinacion_peligrosa) %>% summarise(total=n())
+ggplot(to_graph,aes(x=inclinacion_peligrosa,y=total)) +
+      geom_bar(stat="identity") +
+      labs(x = "Inclinación Peligrosa",
+           y = "Total")
+      
+```
+
+¿Se puede considerar alguna sección más peligrosa que otra?
+
+```{r}
+
+to_graph <- train %>% group_by(nombre_seccion,inclinacion_peligrosa=1) %>% summarise(total=n())
+
+ggplot(to_graph,aes(x=nombre_seccion,y=total)) +
+      geom_bar(stat="identity") +
+      labs(x = "Sección",
+           y = "Total") +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+¿Se puede considerar alguna especie más peligrosa que otra?
+
+```{r}
+
+to_graph <- train %>% group_by(especie,inclinacion_peligrosa=1) %>% summarise(total=n())
+
+ggplot(to_graph,aes(x=especie,y=total)) +
+      geom_bar(stat="identity") +
+      labs(x = "Especie",
+           y = "Total") +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+```{r}
+#Histograma de frecuencias para altura
+
+#barplot(trees$altura) # $ extrae objetos del tipo original. altura es vector
+
+```
+
+Histograma de frecuencias para circunferencia del tronco
+
+```{r}
+
+# Diametro
+# first_data_frame$diametro_cm = first_data_frame$circ_tronco_cm / pi
+# hist(first_data_frame$diametro_cm / pi)
+
+hist(train$circ_tronco_cm, xlab="Circunferencia del tronco", ylab="Frecuencia")
+
+
+```
+
+Modificación de bins de la circunferencia del tronco
+
+```{r}
+
+brk = c(0,65,130,195,Inf)
+lbl = c("Bajo","Medio","Alto","Muy Alto")
+train$circ_tronco_cm_cat = cut(train$circ_tronco_cm, breaks=brk, labels=lbl)
+write.csv(train, "arbolado-publico-mendoza-2021-circ_tronco_cm-train.csv")
+```
+

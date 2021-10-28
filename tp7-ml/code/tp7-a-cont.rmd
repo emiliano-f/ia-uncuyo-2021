@@ -1,0 +1,108 @@
+---
+title: "Trabajo Practico 7 - Parte A - Continuación"
+output: html_notebook
+---
+
+Clasificador Aleatorio
+
+```{r}
+# For manipulating the datasets
+library(readr)
+# Matrix
+library(dplyr) 
+
+
+# Add probability column
+
+probability_col <- function(dataframe){
+  # Random probability
+  probabilities <- runif(nrow(dataframe), min=0, max=1) # rnorm!
+  # New column
+  dataframe$prediction_prob <- probabilities
+  return(dataframe)
+}
+
+# Load dataset 
+trees <- read_csv("./data/arbolado-mza-dataset.csv")
+trees <- probability_col(trees)
+
+```
+
+Función random_classifier
+
+```{r}
+random_classifier <- function(dataframe){
+  return(dataframe %>% mutate(prediction_class = ifelse(prediction_prob > 0.5, 1 ,0)))
+}
+
+new_dataframe <- read_csv("./data/arbolado-publico-mendoza-2021-valid.csv")
+with_probability <- probability_col(new_dataframe)
+to_validate <- random_classifier(with_probability)
+```
+
+Cálculo matriz de confusión - random_classifier
+
+```{r}
+matrix_conf <- function(dataf){
+  true_positive <- dataf %>% filter(inclinacion_peligrosa == 1 & prediction_class == 1)
+  true_negative <- dataf %>% filter(inclinacion_peligrosa == 0 & prediction_class == 0)
+  false_positive <- dataf %>% filter(inclinacion_peligrosa == 0 & prediction_class == 1)
+  false_negative <- dataf %>% filter(inclinacion_peligrosa == 1 & prediction_class == 0)
+  return(c(nrow(true_positive), nrow(false_positive), nrow(false_negative), nrow(true_negative)))
+}
+
+mat <- matrix_conf(to_validate)
+mat #TP, FP, FN, TN
+```
+
+Clasificador por clase mayoritaria
+
+```{r}
+biggerclass_classifier <- function(dataframe) {
+  majority_count <- dataframe %>% group_by(inclinacion_peligrosa) %>% summarise(total=n())
+  if (majority_count[1,"total"] > majority_count[2,"total"]){
+    value <- 0
+  }
+  else{
+    value <- 1
+  }
+  return(dataframe %>% mutate(prediction_class=value))
+}
+
+majority <- biggerclass_classifier(with_probability)
+#matrix <- confusionMatrix()
+mat2 <- matrix_conf(majority)
+mat2 #TP, FP, FN, TN
+```
+
+Métricas
+
+```{r}
+metrics <- function(conf_mat){
+  sensitivity <- conf_mat[1] / (conf_mat[1] + conf_mat[3])
+  specificity <- conf_mat[4] / (conf_mat[4] + conf_mat[2])
+  precision <- conf_mat[1] / (conf_mat[1] + conf_mat[2])
+  accuracy <- (conf_mat[1] + conf_mat[4]) / (conf_mat[1] + conf_mat[4] + conf_mat[2] + conf_mat[3])
+  return(c(sensitivity, specificity, precision, accuracy))
+}
+
+random <- metrics(mat)
+random
+major <- metrics(mat2)
+major
+```
+
+Validación cruzada
+
+```{r}
+create_folds <- function(dataframe, n){
+  rows = nrow(dataframe)
+  data_partition <- ceiling(rows/n)
+  datasplit <- split(dataframe, sample(rep(1:n, data_partition)))
+  return(datasplit)
+}
+
+cross_validation <- function(dataframe, n){
+  
+}
+```
