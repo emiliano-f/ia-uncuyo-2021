@@ -23,7 +23,7 @@ probability_col <- function(dataframe){
 }
 
 # Load dataset 
-trees <- read_csv("./data/arbolado-mza-dataset.csv")
+trees <- read_csv("/home/emiliano/ia-uncuyo-2021/tp7-ml/data/arbolado-mza-dataset.csv")
 trees <- probability_col(trees)
 
 ```
@@ -35,7 +35,7 @@ random_classifier <- function(dataframe){
   return(dataframe %>% mutate(prediction_class = ifelse(prediction_prob > 0.5, 1 ,0)))
 }
 
-new_dataframe <- read_csv("./data/arbolado-publico-mendoza-2021-valid.csv")
+new_dataframe <- read_csv("/home/emiliano/ia-uncuyo-2021/tp7-ml/data/arbolado-publico-mendoza-2021-valid.csv")
 with_probability <- probability_col(new_dataframe)
 to_validate <- random_classifier(with_probability)
 ```
@@ -60,6 +60,7 @@ Clasificador por clase mayoritaria
 ```{r}
 biggerclass_classifier <- function(dataframe) {
   majority_count <- dataframe %>% group_by(inclinacion_peligrosa) %>% summarise(total=n())
+  print(majority_count)
   if (majority_count[1,"total"] > majority_count[2,"total"]){
     value <- 0
   }

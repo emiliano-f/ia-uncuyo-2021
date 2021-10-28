@@ -4,3 +4,10 @@
 
 ### Py ###
 *.pyc
+
+### R ###
+*.RData
+*.Rhistory
+
+### HTML ###
+*.nb.html
