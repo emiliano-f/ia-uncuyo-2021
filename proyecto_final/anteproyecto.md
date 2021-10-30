@@ -10,6 +10,16 @@
 
 # Descripción
 
+Formas de evaluación:
+
+- Predicciones a los 5, 10, 30 minutos; 1, 4, 8, 12, 24 horas.
+
+- Desempeño en al menos dos criptomonedas.
+
+- Disminución progresiva del ratio de error.
+
+- Menor error en periodos cortos.
+
 # Justificación
 
 Las características inherentes al problema indican un contexto tremendamente fluctuante, que depende de muchísimos factores que escapan de la observación de gráficas y se extiende a variables como un nombre, un aspecto tecnológico, o una pandemia.
