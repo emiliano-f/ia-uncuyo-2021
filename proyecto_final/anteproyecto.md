@@ -1,6 +1,6 @@
-# Titulo
+# Predicción de Precios de Criptomonedas Utilizando Series de Tiempo
 
-## Código
+## PPCUTS
 
 # Integrantes
 
@@ -22,4 +22,23 @@ El problema se vuelve prácticamente intratable en el análisis a medio y largo 
 
 # Actividades
 
-1.
+Inicio: 18 de Diciembre de 2021
+Finalización estimada: 14 de Enero de 2022
+
+1. Recopilación y lectura de artículos relevantes para adquirir un panorama amplio del problema (2 días)
+
+2. Lectura de artículos y libros más especializados y práctica con herramientas a utilizar (5 días)
+
+3. Búsqueda del dataset y una interfaz de comunicación (2 días)
+
+4. Implementación base, estructuras, bibliotecas (2 días)
+
+5. Implementación del algoritmo general (3 a 5 días)
+
+6. Análisis de resultados (1 día)
+
+7. Refinamiento (2 días)
+
+8. Escritura de informe final (7 días)
+
+9. Opcional: implementacion con deep learning.
