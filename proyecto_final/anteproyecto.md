@@ -109,3 +109,18 @@ Finalización estimada: 14 de Enero de 2022
 8. Escritura de informe final (7 días)
 
 9. Opcional: implementacion con deep learning.
+
+# Calendario
+
+![calendar](calendar.png?raw=true "Title")
+
+# Fuentes:
+
+https://www.colibri.udelar.edu.uy/jspui/bitstream/20.500.12008/20471/1/tg-gonzalez-federico.pdf
+http://190.169.30.62/bitstream/10872/19752/1/PrincipalTEG.pdf
+https://eprints.ucm.es/id/eprint/50312/1/TFG%20definitivo.pdf
+https://ichi.pro/es/analisis-de-series-temporales-de-criptomonedas-utilizando-deep-learning-y-fbprophet-79902953864895
+Toucan
+Arriba del límite de 100 palabras
+Estamos trabajando para aumentar este límite y mantener cortos los tiempos de descarga. Mientras tanto, trata de subrayar hasta 100 palabras al mismo tiempo para traducir.
+No mostrar otra vez
