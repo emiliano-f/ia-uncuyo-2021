@@ -116,13 +116,25 @@ class Attributes:
         """ Returns majority classification (attributes empty) """
         return "yes" if self.true_length() > self.false_length() else "no"
         
-    def select_subset(self, _attribute: str, _subset: str) -> None:
+    def select_subset(self, _attribute: str, _subset: str) -> list:
         """ Selects subset retaining examples in it """
         
-        for _ in range(self.examples):
-            if self.dic_attributes[_attribute].rows[_] == _subset:
+        deleted: list = []
+        for _ in range(len(self.examples)):
+            # Access to attribute's row
+            if self.dic_attributes[_attribute].rows[_] != _subset:
                 if self.examples[_].is_available():
-                    print()
+                    self.examples[_].not_available()
+                    deleted.append(_)
+        self.counter()
+        return deleted
+    
+    def restore_examples(self, _restore: list) -> None:
+        """ Restores examples in list _restore """
+        
+        for _ in _restore:
+            self.examples[_].to_available()
+        self.counter()
         
 class SubSets:
     

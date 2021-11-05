@@ -24,8 +24,12 @@ def decision_tree(tree: Tree,
         attributes.delete_attribute(best)
         #tree = create_tree(best) # new tree with root attribute best
         m = attributes.dic_attributes[best].major_classification_in_subset(attributes.examples)
+        # List of examples deleted
+        examples_deleted: list
         for subset in attributes.dic_attributes[best].subsets:
-            attributes.select_subset(best, subset)
+            examples_deleted = attributes.select_subset(best, subset)
+            subarbol = decision_tree(tree, attributes, m)
+            attributes.restore_examples(examples_deleted)
         
 def attribute_select(_att: Attributes, _examples: list[Examples]) -> str:
     """ Returns name of attribute selected """
