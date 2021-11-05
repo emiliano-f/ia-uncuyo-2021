@@ -6,8 +6,9 @@ Created on Sat Oct 30 05:39:07 2021
 @author: emilianof_
 """
 import math
-from base import Attributes, Examples, SubSets
-from tree import Tree
+from attributes import Attributes
+from examples import Examples
+from tree import Tree, Node
 
 def decision_tree(tree: Tree, 
                   attributes: Attributes,  
@@ -22,14 +23,15 @@ def decision_tree(tree: Tree,
     else:
         best = attribute_select(attributes, attributes.examples)
         attributes.delete_attribute(best)
-        #tree = create_tree(best) # new tree with root attribute best
-        m = attributes.dic_attributes[best].major_classification_in_subset(attributes.examples)
+        subtree: Node = tree.add_root(best) # new tree with root attribute best
+        m: str = attributes.dic_attributes[best].major_classification_in_subset(attributes.examples)
         # List of examples deleted
         examples_deleted: list
         for subset in attributes.dic_attributes[best].subsets:
             examples_deleted = attributes.select_subset(best, subset)
-            subarbol = decision_tree(tree, attributes, m)
+            decision: str = decision_tree(tree, attributes, m)
             attributes.restore_examples(examples_deleted)
+            subtree.add_leaf(subset, decision)
         
 def attribute_select(_att: Attributes, _examples: list[Examples]) -> str:
     """ Returns name of attribute selected """

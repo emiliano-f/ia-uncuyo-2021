@@ -8,7 +8,9 @@ Created on Sat Oct 30 07:47:13 2021
 #from tree import Tree
 #from decision_tree import decision_tree
 from load_csv import load_csv
-from base import Attributes
+from attributes import Attributes
+from tree import Tree
+from decision_tree import decision_tree
 
 def main():
     dataframe = load_csv("tennis.csv")    
