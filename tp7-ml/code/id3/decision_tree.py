@@ -7,6 +7,7 @@ Created on Sat Oct 30 05:39:07 2021
 """
 import math
 from attributes import Attributes
+from subsets import SubSets
 from examples import Examples
 from tree import Tree, Node
 
@@ -14,9 +15,9 @@ def decision_tree(tree: Tree,
                   attributes: Attributes,  
                   default: str):
     
-    if attributes.examples_length():
+    if attributes.examples_length() == 0:
         return default
-    elif attributes.examples_has_same_classification():
+    elif attributes.examples_have_same_classification():
         return attributes.examples_unique_classification()
     elif attributes.is_empty():
         return attributes.examples_major_classification()
@@ -29,10 +30,12 @@ def decision_tree(tree: Tree,
         examples_deleted: list
         for subset in attributes.dic_attributes[best].subsets:
             examples_deleted = attributes.select_subset(best, subset)
+            print(examples_deleted)
             decision: str = decision_tree(tree, attributes, m)
             attributes.restore_examples(examples_deleted)
             subtree.add_leaf(subset, decision)
-        
+        return best
+    
 def attribute_select(_att: Attributes, _examples: list[Examples]) -> str:
     """ Returns name of attribute selected """
     
@@ -60,17 +63,27 @@ def attribute_select(_att: Attributes, _examples: list[Examples]) -> str:
     pair: tuple
     
     for name in _att.attributes:
-        attribute = _att.dic_attributes[name]
+        attribute: SubSets = _att.dic_attributes[name]
         resto = 0
-        for E in range(len(attribute.subsets)):
+        for _ in range(len(attribute.subsets)):
+            E: str = attribute.subsets[_]
             pair = attribute.counter(E, _att.examples)
-            resto += (pair[0] + pair[1])/_att.length * I(pair[0], pair[1])
+            print(E, pair)
+            resto += (pair[0] + pair[1])/_att.examples_length() * I(pair[0], pair[1])
         gain.append((name, entropy-resto))
 
     return maximum()
             
 def I(pos: float, neg: float) -> float:
     """ Entropy """
+    if pos == 0 and neg == 0: # When take empty subsets
+        return 0.0
     coc_pos: float = pos/(pos + neg)
     coc_neg: float = neg/(pos + neg)
-    return -coc_pos*math.log(coc_pos, 2) - coc_neg*math.log(coc_neg, 2)
+    first: float = 0.0
+    second: float = 0.0
+    if coc_pos != 0:
+        first = - coc_pos*math.log(coc_pos, 2)
+    if coc_neg != 0:
+        second = - coc_neg*math.log(coc_neg, 2)
+    return first + second

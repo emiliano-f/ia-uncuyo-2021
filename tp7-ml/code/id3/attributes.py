@@ -23,7 +23,7 @@ class Attributes:
             attributes: dict = {}
             # column contains name of key
             column: str
-            for _ in range(len(columns)-1):
+            for _ in range(len(columns)):
                 column = columns[_]
                 # Links attribute to its subset
                 attributes[column] = SubSets(df[column])
@@ -45,6 +45,9 @@ class Attributes:
         goal_name: str = columns[len(columns)-1]
         goal: list = df[goal_name].values.tolist()
         
+        # Delete last column in columns
+        columns = columns[0:len(columns)-1]
+        
         # Save list of attributes
         self.attributes = columns
         
@@ -65,7 +68,8 @@ class Attributes:
         
         counter()
         
-        
+    def is_empty(self) -> bool:
+        return self.attributes == 0
 
     def examples_length(self) -> int:
         """ Length of current examples """

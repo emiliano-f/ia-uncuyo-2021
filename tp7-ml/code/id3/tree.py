@@ -21,3 +21,9 @@ class Tree:
         node: Node = Node(_node)
         self.root.append(node)
         return node
+    
+    def show(self) -> None:
+        for leaf in self.root:
+            print(leaf.root)
+            for sub in leaf.leaf:
+                print("\t" + str(sub))

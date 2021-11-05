@@ -49,7 +49,7 @@ class SubSets:
         positives: int = 0
         negatives: int = 0
         for subset in self.subsets:
-            values = self.counter(self, subset, _examples)
+            values = self.counter(subset, _examples)
             positives += values[0]
             negatives += values[1]
         
