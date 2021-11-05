@@ -7,4 +7,5 @@ Created on Sat Oct 30 07:49:53 2021
 """
 
 class Tree:
-    def __init__()
+    def __init__():
+        print("hola")
